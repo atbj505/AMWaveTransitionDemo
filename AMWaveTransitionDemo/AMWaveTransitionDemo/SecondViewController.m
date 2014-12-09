@@ -7,30 +7,28 @@
 //
 
 #import "SecondViewController.h"
+#import "AMWaveTransition.h"
 
 @interface SecondViewController ()
-
+@property (nonatomic, strong)AMWaveTransition *interactive;
 @end
 
 @implementation SecondViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.interactive = [[AMWaveTransition alloc]init];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.interactive attachInteractiveGestureToNavigationController:self.navigationController];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.interactive detachInteractiveGesture];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
